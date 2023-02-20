@@ -40,11 +40,11 @@ export default class login extends Component {
 		return (
 			<div>
 	  
-	  <div class="background">
+	  {/* <div class="background">
 			  <div class="shape"></div>
 			  <div class="shape"></div>
-		  </div>
-		  <form>
+		  </div> */}
+		  {/* <form>
 			  <h3>Ace Skill Traning Center Login</h3>
 	  
 			  <label for="username">Username</label>
@@ -55,10 +55,10 @@ export default class login extends Component {
 	  
 			  
 			  <button name='login' onClick={this.submitdata(this.state.username,this.state.password)}>Log In</button>
-		  </form>
+		  </form> */}
 		  
 			  
-			  {/* <div class="limiter">
+			  <div class="limiter">
 			  <div class="container-login100">
 				  <div class="wrap-login100">
 					  <div class="login100-pic js-tilt" data-tilt>
@@ -71,7 +71,7 @@ export default class login extends Component {
 						  </span>
 	  
 						  <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-							  <input class="input100" type="text" name="email" placeholder="Email"/>
+							  <input class="input100" type="text"  placeholder="Username" name="username" value={this.state.username} onChange={this.handleChange}/>
 							  <span class="focus-input100"></span>
 							  <span class="symbol-input100">
 								  <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -79,7 +79,7 @@ export default class login extends Component {
 						  </div>
 	  
 						  <div class="wrap-input100 validate-input" data-validate = "Password is required">
-							  <input class="input100" type="password" name="pass" placeholder="Password"/>
+							  <input class="input100" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}/>
 							  <span class="focus-input100"></span>
 							  <span class="symbol-input100">
 								  <i class="fa fa-lock" aria-hidden="true"></i>
@@ -87,7 +87,7 @@ export default class login extends Component {
 						  </div>
 						  
 						  <div class="container-login100-form-btn">
-							  <button class="login100-form-btn">
+							  <button class="login100-form-btn" name='login' onClick={this.submitdata(this.state.username,this.state.password)}>
 								  Login
 							  </button>
 						  </div>
@@ -95,7 +95,7 @@ export default class login extends Component {
 					  </form>
 				  </div>
 			  </div>
-		  </div> */}
+		  </div>
 			</div>
 		  );
 
