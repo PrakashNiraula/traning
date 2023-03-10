@@ -11,6 +11,7 @@ import PrintIcon from "@material-ui/icons/Print";
 import ME from "../assets/me.jpeg";
 import Document from "../assets/7.PNG";
 import { AiFillDelete, AiFillPrinter } from "react-icons/ai";
+
 export default class home extends Component {
   constructor(props) {
     super(props);
@@ -30,10 +31,25 @@ export default class home extends Component {
           profile_image: ME,
           doc_image: Document,
         },
+        {
+          id: 2,
+          doc_type: "Loren",
+          name: "Gaurab Chand",
+          phone: "654321",
+          type: "Loren",
+          created_on: "2023/23/2",
+          dob: "2048/05/01",
+          address: "Maitidevi",
+          fathers_name: "Gaurab Chand",
+          voucher_id: 44,
+          profile_image: ME,
+          doc_image: Document,
+        },
       ],
       view: false,
     };
   }
+
   // componentDidMount = () => {
   //   axios
   //     .get("http://140.238.204.76:3001/trainee")
@@ -77,95 +93,90 @@ export default class home extends Component {
       return (
         <div className="overflow-x-auto scrollbar-hide">
           <CContainer fluid>
-            <Table
-              name="datatable"
-              className="w-full border-collapse border border-gray-200"
-            >
+            <Table name="datatable" className="w-full ">
               <thead>
                 <tr>
-                  <th className="px-4 py-2 text-base whitespace-pre">ID</th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">ID</th>
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Document Type
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Full Name
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">Phone</th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">Phone</th>
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Traning Type
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Created on
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">DOB</th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
-                    Address
-                  </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">DOB</th>
+                  <th className="px-4 py-2 text-sm whitespace-pre">Address</th>
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Fathers name
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Voucher id
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Document Image
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">
+                  <th className="px-4 py-2 text-sm whitespace-pre">
                     Profile Image
                   </th>
-                  <th className="px-4 py-2 text-base whitespace-pre">Action</th>
+                  <th className="px-4 py-2 text-sm whitespace-pre">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.traineedata.map((trainee) => (
-                  <tr>
+                  <tr className="hover:bg-gray-100 cursor-pointer">
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.id}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.doc_type}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.name}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.phone}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.type}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.created_on}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.dob}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.address}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.fathers_name}
                       </h3>
                     </td>
                     <td>
-                      <h3 className="px-4 py-2 text-sm whitespace-pre text-gray-400 hover:text-black cursor-pointer">
+                      <h3 className="px-4 py-2 text-sm whitespace-pre ">
                         {trainee.voucher_id}
                       </h3>
                     </td>
