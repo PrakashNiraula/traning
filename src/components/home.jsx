@@ -19,7 +19,7 @@ export default class home extends Component {
       traineedata: [
         {
           id: 1,
-          doc_type: "Loren",
+          doc_type: "Citizenship",
           name: "Sunil Bista",
           phone: "123456",
           type: "Loren",

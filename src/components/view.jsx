@@ -55,7 +55,7 @@ export default class view extends Component {
         console.log("profile IMAGW" + this.state.profile_image);
         return (
           <div className="w-full p-8">
-            <CContainer className="border border-gray-500 shadow-lg rounded-lg p-4 bg-gray-50">
+            <CContainer className="border border-gray-500 shadow-lg p-4 bg-gray-50">
               <CContainer>
                 {/* <CRow className="align-self-start">
                   <CCol>Hello</CCol>
@@ -82,45 +82,46 @@ export default class view extends Component {
                   <CCol></CCol>
                   <CCol>Photo </CCol>
                 </CRow>
-
-                <CRow className="align-self-start">
-                  <CCol>
+                <CRow className="align-self-start  ">
+                  <CCol className="flex flex-col gap-2 ">
                     <CRow>Name: {this.state.traineedata.name}</CRow>
                     <CRow>
                       Document Type: {this.state.traineedata.doc_type}
                     </CRow>
                     <CRow>Date of Birth: {this.state.traineedata.dob}</CRow>
-                    <CRow>Phone : {this.state.traineedata.phone}</CRow>
+                    <CRow>Phone: {this.state.traineedata.phone}</CRow>
                     <CRow>Traning type: {this.state.traineedata.type}</CRow>
                     <CRow>Address: {this.state.traineedata.address}</CRow>
                     <CRow>
                       Fathers Name: {this.state.traineedata.fathers_name}
                     </CRow>
                   </CCol>
-                  <CCol>
+                </CRow>
+                <div className="absolute w-52 h-w-52 top-48 right-72">
+                  <CCol className=" w-full h-full">
                     <img
                       src={this.state.profile_image}
-                      width="200px"
-                      height="200px"
+                      className="w-full h-full object-cover"
                       alt="profile_image"
                     />
                   </CCol>
-                </CRow>
+                </div>
 
-                <CRow className="align-self-start">
-                  <CCol>{this.state.traineedata.doc_type} Image</CCol>
+                <CRow className="align-self-start mt-2">
+                  <CCol>{this.state.traineedata.doc_type}Photo</CCol>
                 </CRow>
-                <CRow className="align-self-start"></CRow>
-                <CRow className="align-self-center">
-                  <CCol>
-                    <img
-                      src={this.state.doc_image}
-                      width="600px"
-                      height="600px"
-                      alt="document_image"
-                    />
-                  </CCol>
-                </CRow>
+                {/* <CRow className="align-self-start"></CRow> */}
+                <div className="w-full flex items-center justify-center">
+                  <CRow className="align-self-center mt-1 w-1/2 h-1/2">
+                    <CCol>
+                      <img
+                        src={this.state.doc_image}
+                        className="w-full h-full object-cover"
+                        alt="document_image"
+                      />
+                    </CCol>
+                  </CRow>
+                </div>
               </CContainer>
             </CContainer>
           </div>
