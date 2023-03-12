@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Navigate, Redirect } from "react-router-dom";
+import Logout from "./Logout";
 
 export default class Register extends Component {
   constructor(props) {
@@ -143,6 +144,7 @@ export default class Register extends Component {
       return (
         <div>
           <div class="limiter">
+            <Logout />
             <div class="container-login100">
               <div class="wrap-login100">
                 <span class="login100-form-title">Ace Skill Traning</span>

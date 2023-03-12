@@ -1,42 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import Login from './components/login'
-import Home from './components/home';
-import View from './components/view';
-import Success from './components/success';
-import register from './components/register';
-import Register from './components/register';
-import { BrowserRouter } from 'react-router-dom';
-import {  
-  BrowserRouter as Router,  
-  Routes,  
-  Route,  
-  Link  
-}   
-from 'react-router-dom'; 
-;
+import logo from "./logo.svg";
+import "./App.css";
+import Login from "./components/Login";
+import Home from "./components/home";
+import View from "./components/view";
+import Success from "./components/success";
+import Register from "./components/register";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 function App() {
   return (
     <div className="App">
-<BrowserRouter>
-<Routes>  
-    <Route exact path='/' element={< Register />}></Route>  
-    <Route exact path='/login' element={< Login />}></Route>  
-    <Route exact path='/home' element={< Home />}></Route>  
-    <Route exact path='/view' element={< View />}></Route>  
-    <Route exact path='/success' element={< Success />}></Route> 
-</Routes>  
-
-</BrowserRouter>
-
-
-
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route element={<PrivateRoutes />}>
+            <Route exact path="/home" element={<Home />} />
+            <Route exact path="/view" element={<View />} />
+            <Route exact path="/success" element={<Success />} />
+            <Route exact path="/register" element={<Register />} />
+          </Route>
+        </Routes>
+      </Router>
 
       {/* <Login/>
       <Home/> */}
-    
 
-      
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

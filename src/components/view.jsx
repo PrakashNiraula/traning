@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import { CContainer, CRow, CCol } from "@coreui/react";
+import Logout from "./Logout";
 
 export default class view extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ export default class view extends Component {
         console.log("profile IMAGW" + this.state.profile_image);
         return (
           <div className="w-full p-8">
+            <Logout />
             <CContainer className="border border-gray-500 shadow-lg p-4 bg-gray-50">
               <CContainer>
                 {/* <CRow className="align-self-start">
