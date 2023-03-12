@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Navigate, Redirect } from "react-router-dom";
-import Logout from "./Logout";
 
 export default class Register extends Component {
   constructor(props) {
@@ -22,24 +21,77 @@ export default class Register extends Component {
       url: "'http://140.238.204.76:3001/trainee'",
       traningtypedata: [],
       documenttypedata: [],
-      selected_docimage: "",
-      selected_profileimage: "",
-      doc_image: "",
-      profile_image: "",
+      // selected_docimage: "",
+      // selected_profileimage: "",
+      doc_image: null,
+      profile_image: null,
       submitted: false,
       isDisabled: false,
+      errors: {},
     };
   }
+  validateFormData = () => {
+    const errors = {};
+    if (!this.state.doc_image) {
+      errors.doc_image = "Document Image is required";
+    } else if (!this.state.image.name.endsWith(".png" || ".PNG")) {
+      errors.doc_image = "Document Image must be a .png file";
+    }
+    if (!this.state.profile_image) {
+      errors.profile_image = "Profile Image is required";
+    } else if (!this.state.image.name.endsWith(".png" || ".PNG")) {
+      errors.profile_image = "Profile Image must be a .png file";
+    }
+    if (!this.state.voucher_id) {
+      errors.voucher_id = "Voucher ID is required";
+    }
+    if (!this.state.fathers_name) {
+      errors.fathers_name = "Father's Name is required";
+    }
+    if (!this.state.address) {
+      errors.address = "Address is required";
+    }
+    if (!this.state.dob) {
+      errors.dob = "Date of birth is required";
+    }
+    if (!this.state.document_number) {
+      errors.document_number = "Documnent Number is required";
+    }
+    if (!this.state.document_type) {
+      errors.document_type = "Documnent Type is required";
+    }
+    if (!this.state.name) {
+      errors.name = "Name is required";
+    }
+    if (!this.state.phone) {
+      errors.phone = "Phone Number is required";
+    }
+
+    if (!this.state.training_type) {
+      errors.training_type = "Training Type is required";
+    }
+    if (!this.state.email) {
+      errors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(this.state.email)) {
+      errors.email = "Invalid email format";
+    }
+    return errors;
+  };
+
   handlechange = (e) => {
-    this.setState({ selected_docimage: e.target.files[0] });
-    console.log("Handling changes");
-    console.log(this.state);
+    if (e.target.name === "doc_image") {
+      this.setState({
+        doc_image: e.target.files[0],
+      });
+    }
   };
 
   handlechange2 = (e) => {
-    this.setState({ selected_profileimage: e.target.files[0] });
-    console.log("Handling changes");
-    console.log(this.state);
+    if (e.target.name === "profile_image") {
+      this.setState({
+        profile_image: e.target.files[0],
+      });
+    }
   };
 
   componentDidMount = (e) => {};
@@ -57,67 +109,75 @@ export default class Register extends Component {
 
   submitform = async (e) => {
     e.preventDefault();
-    console.log("Here submitting");
-    this.setState({
-      isDisabled: true,
-    });
-
-    console.log("We are here");
-    console.log(this.state);
-
-    const formData = new FormData();
-    // Update the formData object
-    formData.append("myfile", this.state.selected_docimage);
-
-    var res = await axios.post("http://140.238.204.76:3001/upload", formData);
-    const formData2 = new FormData();
-    // Update the formData object
-    formData2.append("myfile", this.state.selected_profileimage);
-    var res2 = await axios.post("http://140.238.204.76:3001/upload", formData2);
-    console.log(res.data);
-    console.log(res2.data);
-    var data = JSON.stringify({
-      document_type: this.state.document_type,
-      name: this.state.name,
-      phone: this.state.phone,
-      traning_type: this.state.training_type,
-      document_number: this.state.document_number,
-      dob:
-        this.state.dob.split("-")[0] +
-        "/" +
-        this.state.dob.split("-")[1] +
-        "/" +
-        this.state.dob.split("-")[2],
-      address: this.state.address,
-      fathers_name: this.state.fathers_name,
-      voucher_id: this.state.voucher_id,
-      doc_image: res.data.path,
-      profile_image: res2.data.path,
-    });
-
-    var config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://140.238.204.76:3001/trainee",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-
-    console.log(data);
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
+    const errors = this.validateFormData();
+    if (Object.keys(errors).length != 0) {
+      this.setState({ errors });
+    } else {
+      console.log("Here submitting");
+      this.setState({
+        isDisabled: true,
       });
 
-    this.setState({
-      submitted: true,
-    });
+      console.log("We are here");
+      console.log(this.state);
+
+      const formData = new FormData();
+      // Update the formData object
+      formData.append("myfile", this.state.selected_docimage);
+
+      var res = await axios.post("http://140.238.204.76:3001/upload", formData);
+      const formData2 = new FormData();
+      // Update the formData object
+      formData2.append("myfile", this.state.selected_profileimage);
+      var res2 = await axios.post(
+        "http://140.238.204.76:3001/upload",
+        formData2
+      );
+      console.log(res.data);
+      console.log(res2.data);
+      var data = JSON.stringify({
+        document_type: this.state.document_type,
+        name: this.state.name,
+        phone: this.state.phone,
+        traning_type: this.state.training_type,
+        document_number: this.state.document_number,
+        dob:
+          this.state.dob.split("-")[0] +
+          "/" +
+          this.state.dob.split("-")[1] +
+          "/" +
+          this.state.dob.split("-")[2],
+        address: this.state.address,
+        fathers_name: this.state.fathers_name,
+        voucher_id: this.state.voucher_id,
+        doc_image: res.data.path,
+        profile_image: res2.data.path,
+      });
+
+      var config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "http://140.238.204.76:3001/trainee",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      console.log(data);
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      this.setState({
+        submitted: true,
+      });
+    }
   };
 
   render() {
@@ -144,7 +204,6 @@ export default class Register extends Component {
       return (
         <div>
           <div class="limiter">
-            <Logout />
             <div class="container-login100">
               <div class="wrap-login100">
                 <span class="login100-form-title">Ace Skill Traning</span>
@@ -199,6 +258,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.name && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.name}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <input
@@ -211,6 +275,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.phone && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.phone}
+                    </span>
+                  )}
                 </div>
 
                 <div class="wrap-input100 validate-input">
@@ -224,6 +293,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.address && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.address}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <input
@@ -236,6 +310,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.document_number && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.document_number}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <label className="mb-2">Enter your date of birth</label>
@@ -249,6 +328,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.dob && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.dob}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <input
@@ -261,6 +345,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.fathers_name && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.fathers_name}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <input
@@ -273,6 +362,11 @@ export default class Register extends Component {
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.voucher_id && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.voucher_id}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <label for="input100" className="mb-2">
@@ -282,11 +376,16 @@ export default class Register extends Component {
                     class="input100 "
                     type="file"
                     name="doc_image"
-                    placeholder=""
+                    accept=".png"
                     onChange={this.handlechange}
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.doc_image && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.doc_image}
+                    </span>
+                  )}
                 </div>
                 <div class="wrap-input100 validate-input">
                   <label for="input100" className="mb-2">
@@ -297,11 +396,16 @@ export default class Register extends Component {
                     class="input100"
                     type="file"
                     name="profile_image"
-                    placeholder=""
+                    accept=".png"
                     onChange={this.handlechange2}
                   />
                   <span class="focus-input100"></span>
                   <span class="symbol-input100"></span>
+                  {this.state.errors.profile_image && (
+                    <span className="text-start flex w-full ml-4 font-semibold text-red-600">
+                      {this.state.errors.profile_image}
+                    </span>
+                  )}
                 </div>
                 <div class="container-login100-form-btn">
                   <button
