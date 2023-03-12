@@ -11,6 +11,7 @@ import PrintIcon from "@material-ui/icons/Print";
 import ME from "../assets/me.jpeg";
 import Document from "../assets/7.PNG";
 import { AiFillDelete, AiFillPrinter } from "react-icons/ai";
+import Logout from "./Logout";
 
 export default class home extends Component {
   constructor(props) {
@@ -86,12 +87,14 @@ export default class home extends Component {
       view: true,
     });
   };
+
   render() {
     if (this.state.view == true) {
       return <Navigate to="/view" replace={true} />;
     } else if (this.state.traineedata != []) {
       return (
         <div className="overflow-x-auto scrollbar-hide">
+          <Logout />
           <CContainer fluid>
             <Table name="datatable" className="w-full ">
               <thead>
