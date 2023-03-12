@@ -376,7 +376,7 @@ export default class Register extends Component {
                     class="input100 "
                     type="file"
                     name="doc_image"
-                    accept=".png"
+                    accept="image/*"
                     onChange={this.handlechange}
                   />
                   <span class="focus-input100"></span>
@@ -396,7 +396,7 @@ export default class Register extends Component {
                     class="input100"
                     type="file"
                     name="profile_image"
-                    accept=".png"
+                    accept="image/*"
                     onChange={this.handlechange2}
                   />
                   <span class="focus-input100"></span>
