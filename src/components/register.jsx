@@ -34,13 +34,13 @@ export default class Register extends Component {
     const errors = {};
     if (!this.state.doc_image) {
       errors.doc_image = "Document Image is required";
-    } else if (!this.state.image.name.endsWith(".png" || ".PNG")) {
-      errors.doc_image = "Document Image must be a .png file";
+    } else if (this.state.image.name.endsWith(".png")) {
+      errors.doc_image = "Document Image must not be in a .png file";
     }
     if (!this.state.profile_image) {
       errors.profile_image = "Profile Image is required";
-    } else if (!this.state.image.name.endsWith(".png" || ".PNG")) {
-      errors.profile_image = "Profile Image must be a .png file";
+    } else if (this.state.image.name.endsWith(".png")) {
+      errors.profile_image = "Profile Image must not be in a .png file";
     }
     if (!this.state.voucher_id) {
       errors.voucher_id = "Voucher ID is required";
